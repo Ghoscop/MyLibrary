@@ -1,1 +1,36 @@
-<p>categorias works!</p>
+<div class="container">
+
+  <h1>Categorias</h1>
+
+  <div class="formulario">
+    <input
+      type="text"
+      placeholder="Nome"
+      [(ngModel)]="novaCategoria.nome"
+    />
+
+    <input
+      type="text"
+      placeholder="Descrição"
+      [(ngModel)]="novaCategoria.descricao"
+    />
+
+    <button (click)="criarCategoria()">
+      Adicionar
+    </button>
+  </div>
+
+  <div class="card" *ngFor="let categoria of categorias">
+
+    <div>
+      <h3>{{ categoria.nome }}</h3>
+      <p>{{ categoria.descricao }}</p>
+    </div>
+
+    <button (click)="excluirCategoria(categoria.id!)">
+      Excluir
+    </button>
+
+  </div>
+
+</div>
