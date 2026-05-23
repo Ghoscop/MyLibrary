@@ -1,10 +1,7 @@
-package model;
+package com.example.mylibrary.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -32,7 +29,7 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
 
     @Column(nullable = false)
-    private LocalDate dataDevolucao;
+    private LocalDate dataDevolucaoPrevista;
 
     private LocalDate dataDevolucaoEfetiva;
 }
