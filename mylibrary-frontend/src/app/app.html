@@ -1,8 +1,30 @@
-<nav>
-  <a routerLink="/">Dashboard</a>
-  <a routerLink="/categorias">Categorias</a>
-  <a routerLink="/livros">Livros</a>
-  <a routerLink="/emprestimos">Empréstimos</a>
-</nav>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">📚</span>
+      <div>
+        <h2>MyLibrary</h2>
+        <p>Biblioteca pessoal</p>
+      </div>
+    </div>
 
-<router-outlet></router-outlet>
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Dashboard
+      </a>
+      <a routerLink="/categorias" routerLinkActive="active">
+        Categorias
+      </a>
+      <a routerLink="/livros" routerLinkActive="active">
+        Livros
+      </a>
+      <a routerLink="/emprestimos" routerLinkActive="active">
+        Empréstimos
+      </a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
