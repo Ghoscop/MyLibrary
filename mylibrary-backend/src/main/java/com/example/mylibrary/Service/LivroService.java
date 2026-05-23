@@ -1,5 +1,6 @@
 package com.example.mylibrary.Service;
 
+import com.example.mylibrary.dto.LivroDTO;
 import com.example.mylibrary.model.Categoria;
 import com.example.mylibrary.model.Livro;
 import com.example.mylibrary.model.StatusLivro;
@@ -21,26 +22,41 @@ public class LivroService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public List<Livro> findAll() {
+    public List<LivroDTO> findAll() {
         return repository.findAll()
-                .stream().sorted().toList();
+                .stream()
+                .map(this::converterParaDTO)
+                .toList();
     }
 
-    public Livro buscarPorId(Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+    public LivroDTO findById(Long id) {
+
+        Livro livro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado."));
+
+        return converterParaDTO(livro);
     }
 
-    public List<Livro> buscarPorTexto(String texto) {
-        return repository.findByTituloContainingIgnoreCaseOrAutorContainingIgnoreCase(texto, texto);
+    public List<LivroDTO> buscarPorTexto(String texto) {
+        return repository
+                .findByTituloContainingIgnoreCaseOrAutorContainingIgnoreCase(texto, texto)
+                .stream()
+                .map(this::converterParaDTO)
+                .toList();
     }
 
-    public List<Livro> filtrarPorCategoria(Long categoriaId) {
-        return repository.findByCategoriaId(categoriaId);
+    public List<LivroDTO> filtrarPorCategoria(Long categoriaId) {
+        return repository.findByCategoriaId(categoriaId)
+                .stream()
+                .map(this::converterParaDTO)
+                .toList();
     }
 
-    public List<Livro> filtrarPorStatus(StatusLivro status) {
-        return repository.findByStatus(String.valueOf(status));
+    public List<LivroDTO> filtrarPorStatus(StatusLivro status) {
+        return repository.findByStatus(status)
+                .stream()
+                .map(this::converterParaDTO)
+                .toList();
     }
 
     public List<Livro> findByTituloContainingIgnoreCaseOrAutorContainingIgnoreCase(String titulo, String autor) {
@@ -66,12 +82,25 @@ public class LivroService {
     }
 
     public void excluir(Long id) {
-        Livro livro = buscarPorId(id);
+        Livro livro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado."));
 
-        if(livro.getStatus() == StatusLivro.EMPRESTADO){
+        if (livro.getStatus() == StatusLivro.EMPRESTADO) {
             throw new RuntimeException("Não é possível excluir livro emprestado.");
         }
+
         repository.delete(livro);
+    }
+
+    private LivroDTO converterParaDTO(Livro livro) {
+        return new LivroDTO(
+                livro.getId(),
+                livro.getTitulo(),
+                livro.getAutor(),
+                livro.getStatus(),
+                livro.getCategoria().getId(),
+                livro.getCategoria().getNome()
+        );
     }
 
 }

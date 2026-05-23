@@ -4,6 +4,7 @@ import com.example.mylibrary.Service.LivroService;
 import com.example.mylibrary.model.Livro;
 import com.example.mylibrary.model.StatusLivro;
 import org.springframework.web.bind.annotation.*;
+import com.example.mylibrary.dto.LivroDTO;
 
 import java.util.List;
 
@@ -19,27 +20,27 @@ public class LivroController {
     }
 
     @GetMapping
-    public List<Livro> findAll(){
+    public List<LivroDTO> findAll(){
         return livroService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Livro buscarPorId(@PathVariable Long id){
-        return livroService.buscarPorId(id);
+    public LivroDTO buscarPorId(@PathVariable Long id){
+        return livroService.findById(id);
     }
 
     @DeleteMapping("/buscar")
-    public List<Livro> buscarPorTexto(@RequestParam String texto){
+    public List<LivroDTO> buscarPorTexto(@RequestParam String texto){
         return livroService.buscarPorTexto(texto);
     }
 
     @GetMapping("/categoria/{categoriaId}")
-    public List<Livro> buscarPorCategoria(@PathVariable long categoriaId){
+    public List<LivroDTO> buscarPorCategoria(@PathVariable long categoriaId){
         return livroService.filtrarPorCategoria(categoriaId);
     }
 
     @GetMapping("/status/{status}")
-    public List<Livro> buscarPorStatus(@PathVariable StatusLivro status){
+    public List<LivroDTO> buscarPorStatus(@PathVariable StatusLivro status){
         return livroService.filtrarPorStatus(status);
     }
 

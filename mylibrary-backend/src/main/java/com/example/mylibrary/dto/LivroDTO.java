@@ -7,8 +7,6 @@ public class LivroDTO {
     private Long id;
     private String titulo;
     private String autor;
-    private String isbn;
-    private Integer ano;
     private StatusLivro status;
 
     private Long categoriaId;
@@ -18,7 +16,6 @@ public class LivroDTO {
     }
 
     public LivroDTO(Long id, String titulo, String autor,
-                    String isbn, Integer ano,
                     StatusLivro status,
                     Long categoriaId,
                     String categoriaNome) {
@@ -26,8 +23,6 @@ public class LivroDTO {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
-        this.isbn = isbn;
-        this.ano = ano;
         this.status = status;
         this.categoriaId = categoriaId;
         this.categoriaNome = categoriaNome;
@@ -43,14 +38,6 @@ public class LivroDTO {
 
     public String getAutor() {
         return autor;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public Integer getAno() {
-        return ano;
     }
 
     public StatusLivro getStatus() {
@@ -75,14 +62,6 @@ public class LivroDTO {
 
     public void setAutor(String autor) {
         this.autor = autor;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public void setAno(Integer ano) {
-        this.ano = ano;
     }
 
     public void setStatus(StatusLivro status) {
