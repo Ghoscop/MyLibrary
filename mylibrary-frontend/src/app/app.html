@@ -9,16 +9,16 @@
     </div>
 
     <nav>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         Dashboard
       </a>
-      <a routerLink="/categorias" routerLinkActive="active">
+      <a [routerLink]="['/categorias']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         Categorias
       </a>
-      <a routerLink="/livros" routerLinkActive="active">
+      <a [routerLink]="['/livros']" routerLinkActive="active">
         Livros
       </a>
-      <a routerLink="/emprestimos" routerLinkActive="active">
+      <a [routerLink]="['/emprestimos']" routerLinkActive="active">
         Empréstimos
       </a>
     </nav>

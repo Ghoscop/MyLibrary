@@ -1,5 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit, inject, ChangeDetectorRef} from '@angular/core';
 import { CommonModule} from '@angular/common';
 
 import { Categoria } from '../../models/categoria';
@@ -18,6 +17,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class Categorias implements OnInit{
 
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private service: CategoriaService = inject(CategoriaService);
 
   categorias: Categoria[] = [];
@@ -28,13 +28,17 @@ export class Categorias implements OnInit{
   };
 
   ngOnInit(): void {
-    this.carregarCategorias();
+      this.carregarCategorias();
   }
 
   carregarCategorias(): void {
     this.service.findAll().subscribe({
       next: (dados) => {
         this.categorias = dados;
+        this.cdr.detectChanges();
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar categorias:', erro);
       }
     });
   }
