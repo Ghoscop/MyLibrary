@@ -5,6 +5,8 @@ import com.example.mylibrary.model.Categoria;
 import com.example.mylibrary.model.Livro;
 import com.example.mylibrary.model.StatusLivro;
 import com.example.mylibrary.repository.CategoriaRepository;
+import com.example.mylibrary.repository.EmprestimoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.mylibrary.repository.LivroRepository;
 
@@ -16,10 +18,12 @@ public class LivroService {
 
     private final LivroRepository repository;
     private final CategoriaRepository categoriaRepository;
+    private final EmprestimoRepository emprestimoRepository;
 
-    public LivroService(LivroRepository livroRepository, CategoriaRepository categoriaRepository) {
-        this.repository = livroRepository;
+    public LivroService(LivroRepository repository, CategoriaRepository categoriaRepository, EmprestimoRepository emprestimoRepository) {
+        this.repository = repository;
         this.categoriaRepository = categoriaRepository;
+        this.emprestimoRepository = emprestimoRepository;
     }
 
     public List<LivroDTO> findAll() {
@@ -92,6 +96,7 @@ public class LivroService {
         return repository.save(livro);
     }
 
+    @Transactional
     public void excluir(Long id) {
         Livro livro = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado."));
@@ -100,6 +105,7 @@ public class LivroService {
             throw new RuntimeException("Não é possível excluir livro emprestado.");
         }
 
+        emprestimoRepository.deleteByLivroId(id);
         repository.delete(livro);
     }
 
