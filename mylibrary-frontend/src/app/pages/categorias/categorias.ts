@@ -20,6 +20,9 @@ export class Categorias implements OnInit{
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private service: CategoriaService = inject(CategoriaService);
 
+
+  mensagemErro = '';
+
   categorias: Categoria[] = [];
 
   novaCategoria: Categoria = {
@@ -46,6 +49,8 @@ export class Categorias implements OnInit{
 
   criarCategoria(): void {
 
+    this.mensagemErro = '';
+
     this.service.criar(this.novaCategoria).subscribe({
       next: () => {
 
@@ -55,6 +60,15 @@ export class Categorias implements OnInit{
         };
 
         this.carregarCategorias();
+      },
+
+      error: (erro) => {
+
+        this.mensagemErro =
+          erro?.error?.mensagem ||
+          'Erro ao cadastrar categoria.';
+
+        this.cdr.detectChanges();
       }
     });
   }

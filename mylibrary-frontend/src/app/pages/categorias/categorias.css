@@ -117,3 +117,14 @@ button {
 .delete-btn:hover {
   background: #fecaca;
 }
+
+.erro-box {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+

@@ -75,6 +75,17 @@ public class LivroService {
     public Livro criar(Livro livro) {
         Categoria categoria = categoriaRepository.findById(livro.getCategoria().getId())
                 .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+        boolean livroJaExiste = repository.existsByTituloIgnoreCaseAndAutorIgnoreCaseAndCategoriaId(
+                livro.getTitulo(),
+                livro.getAutor(),
+                livro.getCategoria().getId()
+        );
+
+        if (livroJaExiste) {
+            throw new RuntimeException("Já existe um livro com esse título, autor e categoria.");
+        }
+
         livro.setCategoria(categoria);
         livro.setStatus(StatusLivro.DISPONIVEL);
 

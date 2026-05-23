@@ -13,4 +13,5 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
     List<Livro> findByTituloContainingIgnoreCaseOrAutorContainingIgnoreCase(String titulo, String autor);
     long countByCategoriaId(Long categoriaId);
     long countByStatus(StatusLivro status);
+    boolean existsByTituloIgnoreCaseAndAutorIgnoreCaseAndCategoriaId(String titulo, String autor, Long id);
 }

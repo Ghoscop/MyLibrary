@@ -29,7 +29,7 @@ public class LivroController {
         return livroService.findById(id);
     }
 
-    @DeleteMapping("/buscar")
+    @GetMapping("/buscar")
     public List<LivroDTO> buscarPorTexto(@RequestParam String texto){
         return livroService.buscarPorTexto(texto);
     }

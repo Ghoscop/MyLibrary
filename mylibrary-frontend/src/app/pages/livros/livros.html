@@ -1,1 +1,105 @@
-<p>livros works!</p>
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Gerenciamento do acervo</p>
+    <h1>Livros</h1>
+    <span>Cadastre, visualize e gerencie os livros da biblioteca.</span>
+  </div>
+</section>
+
+<section class="form-card">
+
+  <h2>Novo livro</h2>
+
+  <div
+    class="erro-box"
+    *ngIf="mensagemErro"
+  >
+    {{ mensagemErro }}
+  </div>
+
+  <div class="form-grid">
+
+    <input
+      type="text"
+      placeholder="Título"
+      [(ngModel)]="novoLivro.titulo"
+    />
+
+    <input
+      type="text"
+      placeholder="Autor"
+      [(ngModel)]="novoLivro.autor"
+    />
+
+    <select [(ngModel)]="novoLivro.categoria!.id">
+
+      <option [value]="0">
+        Selecione uma categoria
+      </option>
+
+      <option
+        *ngFor="let categoria of categorias"
+        [value]="categoria.id"
+      >
+        {{ categoria.nome }}
+      </option>
+
+    </select>
+
+    <button (click)="criarLivro()">
+      Adicionar livro
+    </button>
+
+  </div>
+
+</section>
+
+<section class="search-bar">
+
+  <input
+    type="text"
+    placeholder="Buscar por título ou autor"
+    [(ngModel)]="termoBusca"
+  />
+
+  <button (click)="buscarLivro()">
+    Buscar
+  </button>
+
+</section>
+
+<section class="livro-grid">
+
+  <article class="livro-card" *ngFor="let livro of livros">
+
+    <div class="book-icon">
+      📚
+    </div>
+
+    <div class="livro-info">
+
+      <h3>{{ livro.titulo }}</h3>
+
+      <p><strong>Autor:</strong> {{ livro.autor }}</p>
+
+      <p><strong>Categoria:</strong> {{ livro.categoriaNome }}</p>
+
+      <span
+        class="status"
+        [class.emprestado]="livro.status === 'EMPRESTADO'"
+      >
+        {{ livro.status }}
+      </span>
+
+    </div>
+
+    <button
+      class="delete-btn"
+      (click)="excluirLivro(livro.id!)"
+    >
+      Excluir
+    </button>
+
+  </article>
+
+</section>

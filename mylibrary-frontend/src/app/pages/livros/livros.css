@@ -1,0 +1,154 @@
+.page-header {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: white;
+  padding: 32px;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.page-header span {
+  display: block;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.form-card,
+.search-bar {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+input,
+select {
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe3ef;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 13px 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.form-grid button,
+.search-bar button {
+  background: #2563eb;
+  color: white;
+}
+
+.search-bar {
+  display: flex;
+  gap: 12px;
+}
+
+.search-bar input {
+  flex: 1;
+}
+
+.livro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.livro-card {
+  background: white;
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.book-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: #ede9fe;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 24px;
+}
+
+.livro-info h3 {
+  margin: 0 0 10px;
+}
+
+.livro-info p {
+  margin: 6px 0;
+  color: #475569;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.emprestado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.delete-btn {
+  margin-top: auto;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+}
+
+.erro-box {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
