@@ -1,1 +1,108 @@
-<p>emprestimos works!</p>
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Controle de circulação</p>
+    <h1>Empréstimos</h1>
+    <span>Gerencie empréstimos e devoluções dos livros da biblioteca.</span>
+  </div>
+</section>
+
+<section class="form-card">
+
+  <h2>Novo empréstimo</h2>
+
+  <div
+    class="erro-box"
+    *ngIf="mensagemErro"
+  >
+    {{ mensagemErro }}
+  </div>
+
+  <div class="form-grid">
+
+    <select [(ngModel)]="novoEmprestimo.livro!.id">
+
+      <option [value]="0">
+        Selecione um livro
+      </option>
+
+      <option
+        *ngFor="let livro of livros"
+        [value]="livro.id"
+      >
+        {{ livro.titulo }}
+      </option>
+
+    </select>
+
+    <input
+      type="text"
+      placeholder="Nome da pessoa"
+      [(ngModel)]="novoEmprestimo.nomePessoa"
+    />
+
+    <input
+      type="text"
+      placeholder="Telefone"
+      [(ngModel)]="novoEmprestimo.telefone"
+    />
+
+    <input
+      type="date"
+      [(ngModel)]="novoEmprestimo.dataDevolucaoPrevista"
+    />
+
+    <button (click)="emprestarLivro()">
+      Registrar empréstimo
+    </button>
+
+  </div>
+
+</section>
+
+<section class="emprestimo-grid">
+
+  <article
+    class="emprestimo-card"
+    *ngFor="let emprestimo of emprestimos"
+  >
+
+    <div class="emprestimo-icon">
+      📕
+    </div>
+
+    <div class="emprestimo-info">
+
+      <h3>{{ emprestimo.tituloLivro }}</h3>
+
+      <p>
+        <strong>Pessoa:</strong>
+        {{ emprestimo.nomePessoa }}
+      </p>
+
+      <p>
+        <strong>Telefone:</strong>
+        {{ emprestimo.telefone }}
+      </p>
+
+      <p>
+        <strong>Empréstimo:</strong>
+        {{ emprestimo.dataEmprestimo }}
+      </p>
+
+      <p>
+        <strong>Devolução prevista:</strong>
+        {{ emprestimo.dataDevolucaoPrevista }}
+      </p>
+
+    </div>
+
+    <button
+      class="devolver-btn"
+      (click)="devolverLivro(emprestimo.id!)"
+    >
+      Devolver
+    </button>
+
+  </article>
+
+</section>
