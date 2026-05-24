@@ -1,0 +1,114 @@
+<section class="hero">
+
+  <div>
+    <p class="eyebrow">Painel geral</p>
+    <h1>Dashboard</h1>
+    <span>
+      Visão geral do sistema da biblioteca.
+    </span>
+  </div>
+
+</section>
+
+<section
+  class="stats-grid"
+  *ngIf="dashboard"
+>
+
+  <article class="stat-card blue">
+
+    <div class="icon">
+      📚
+    </div>
+
+    <div>
+      <h2>{{ dashboard.totalLivros }}</h2>
+      <p>Total de livros</p>
+    </div>
+
+  </article>
+
+  <article class="stat-card green">
+
+    <div class="icon">
+      ✅
+    </div>
+
+    <div>
+      <h2>{{ dashboard.livrosDisponiveis }}</h2>
+      <p>Disponíveis</p>
+    </div>
+
+  </article>
+
+  <article class="stat-card orange">
+
+    <div class="icon">
+      📕
+    </div>
+
+    <div>
+      <h2>{{ dashboard.livrosEmprestados }}</h2>
+      <p>Emprestados</p>
+    </div>
+
+  </article>
+
+  <article class="stat-card purple">
+
+    <div class="icon">
+      🔄
+    </div>
+
+    <div>
+      <h2>{{ dashboard.emprestimosAtivos }}</h2>
+      <p>Empréstimos ativos</p>
+    </div>
+
+  </article>
+
+</section>
+
+<section
+  class="emprestimos-section"
+  *ngIf="dashboard"
+>
+
+  <div class="section-title">
+
+    <h2>Últimos empréstimos</h2>
+
+  </div>
+
+  <div class="emprestimo-grid">
+
+    <article
+      class="emprestimo-card"
+      *ngFor="let emprestimo of dashboard.ultimosEmprestimos"
+    >
+
+      <div class="emprestimo-icon">
+        📖
+      </div>
+
+      <div>
+
+        <h3>{{ emprestimo.tituloLivro }}</h3>
+
+        <p>
+          <strong>Pessoa:</strong>
+          {{ emprestimo.nomePessoa }}
+        </p>
+
+        <p>
+          <strong>Data:</strong>
+          {{ emprestimo.dataEmprestimo }}
+        </p>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

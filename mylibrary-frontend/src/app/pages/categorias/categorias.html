@@ -1,0 +1,57 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Organização do acervo</p>
+    <h1>Categorias</h1>
+    <span>Cadastre e organize seus livros por tipo, tema ou área de interesse.</span>
+  </div>
+</section>
+
+<section class="form-card">
+  <h2>Nova categoria</h2>
+
+  <div class="sucesso-box" *ngIf="mensagemSucesso">
+    {{ mensagemSucesso }}
+  </div>
+
+  <div
+    class="erro-box"
+    *ngIf="mensagemErro"
+  >
+    {{ mensagemErro }}
+  </div>
+
+  <div class="form-grid">
+    <input
+      type="text"
+      placeholder="Nome da categoria"
+      [(ngModel)]="novaCategoria.nome"
+    />
+
+    <input
+      type="text"
+      placeholder="Descrição"
+      [(ngModel)]="novaCategoria.descricao"
+    />
+
+    <button (click)="criarCategoria()">
+      Adicionar categoria
+    </button>
+  </div>
+</section>
+
+<section class="category-grid">
+  <article class="category-card" *ngFor="let categoria of categorias">
+    <div class="category-icon">
+      📖
+    </div>
+
+    <div class="category-info">
+      <h3>{{ categoria.nome }}</h3>
+      <p>{{ categoria.descricao }}</p>
+    </div>
+
+    <button class="delete-btn" (click)="excluirCategoria(categoria.id!)">
+      Excluir
+    </button>
+  </article>
+</section>
