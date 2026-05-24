@@ -1,16 +1,8 @@
-import {
-  Component,
-  OnInit,
-  inject,
-  ChangeDetectorRef
-} from '@angular/core';
-
+import {Component, OnInit, inject, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { Livro } from '../../models/Livro';
 import { Emprestimo } from '../../models/Emprestimo';
-
 import { LivroService } from '../../services/livro';
 import { EmprestimoService } from '../../services/emprestimo';
 
@@ -30,6 +22,7 @@ export class Emprestimos implements OnInit {
   private emprestimoService = inject(EmprestimoService);
   private cdr = inject(ChangeDetectorRef);
 
+  atrasados: Emprestimo[] = [];
   livros: Livro[] = [];
   emprestimos: Emprestimo[] = [];
 
@@ -47,6 +40,7 @@ export class Emprestimos implements OnInit {
   ngOnInit(): void {
     this.carregarLivros();
     this.carregarEmprestimos();
+    this.carregarAtrasados();
   }
 
   carregarLivros(): void {
@@ -57,6 +51,17 @@ export class Emprestimos implements OnInit {
 
         next: (dados) => {
           this.livros = dados;
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  carregarAtrasados(): void {
+    this.emprestimoService
+      .atrasados()
+      .subscribe({
+        next: (dados) => {
+          this.atrasados = dados;
           this.cdr.detectChanges();
         }
       });
@@ -96,6 +101,7 @@ export class Emprestimos implements OnInit {
 
           this.carregarLivros();
           this.carregarEmprestimos();
+          this.carregarAtrasados();
         },
 
         error: (erro) => {
@@ -118,6 +124,7 @@ export class Emprestimos implements OnInit {
         next: () => {
           this.carregarLivros();
           this.carregarEmprestimos();
+          this.carregarAtrasados();
         }
       });
   }
