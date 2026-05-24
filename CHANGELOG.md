@@ -1,22 +1,28 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-## [0.1.0] - 2026-05-23
+## [1.0.0] - 2026-05-24
 
 ### Added
+- Backend Spring Boot completo
+- Frontend Angular 17 completo
 - CRUD de categorias
 - CRUD de livros
-- Sistema de empréstimos e devoluções
-- Dashboard de estatísticas
-- DTOs para respostas da API
-- Tratamento global de exceções
-- Banco H2 configurado
-- Relatório de empréstimos atrasados
-
-### Changed
-- Refatoração dos services para utilização de DTOs
+- Sistema de empréstimos
+- Sistema de devoluções
+- Dashboard profissional
+- Relatório de atrasados
+- Busca e filtros
+- Validações visuais
+- Mensagens de sucesso e erro
+- Pipeline GitHub Actions
 
 ### Fixed
-- Correções nos repositories JPA
-- Correção de relacionamentos entre entidades
+- Correção de renderização Angular
+- Correção de exclusão de livros devolvidos
+- Correção de busca de livros
+- Correção de validação de empréstimos
+
+### Docs
+- README completo
+- Matriz de rastreabilidade
+- Documentação dos RFs
