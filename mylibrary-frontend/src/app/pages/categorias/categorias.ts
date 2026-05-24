@@ -20,10 +20,9 @@ export class Categorias implements OnInit{
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private service: CategoriaService = inject(CategoriaService);
 
-
-  mensagemErro = '';
-
   categorias: Categoria[] = [];
+  mensagemErro = '';
+  mensagemSucesso = '';
 
   novaCategoria: Categoria = {
     nome: '',
@@ -50,10 +49,12 @@ export class Categorias implements OnInit{
   criarCategoria(): void {
 
     this.mensagemErro = '';
+    this.mensagemSucesso = '';
 
     this.service.criar(this.novaCategoria).subscribe({
       next: () => {
 
+        this.mensagemSucesso = 'Categoria cadastrada com sucesso!';
         this.novaCategoria = {
           nome: '',
           descricao: ''
@@ -74,11 +75,17 @@ export class Categorias implements OnInit{
   }
 
   excluirCategoria(id: number): void {
+    const confirmar = confirm('Tem certeza que deseja excluir esta categoria?');
+
+    if (!confirmar) {
+      return;
+    }
+
     this.service.excluir(id).subscribe({
       next: () => {
+        this.mensagemSucesso = 'Categoria excluída com sucesso!';
         this.carregarCategorias();
       }
     });
   }
-
 }

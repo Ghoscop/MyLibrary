@@ -185,3 +185,13 @@ button {
   margin: 6px 0;
   color: #475569;
 }
+
+.sucesso-box {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}

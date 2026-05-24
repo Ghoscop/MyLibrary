@@ -23,6 +23,7 @@ export class Livros implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   mensagemErro = '';
+  mensagemSucesso = '';
   livros: Livro[] = [];
   categorias: Categoria[] = [];
 
@@ -62,10 +63,13 @@ export class Livros implements OnInit {
   criarLivro(): void {
 
     this.mensagemErro = '';
+    this.mensagemSucesso = '';
 
     this.livroService.criar(this.novoLivro).subscribe({
 
       next: () => {
+
+        this.mensagemSucesso = 'Livro cadastrado com sucesso!';
 
         this.novoLivro = {
           titulo: '',
@@ -90,8 +94,15 @@ export class Livros implements OnInit {
   }
 
   excluirLivro(id: number): void {
+    const confirmar = confirm('Tem certeza que deseja excluir este livro?');
+
+    if (!confirmar) {
+      return;
+    }
+
     this.livroService.excluir(id).subscribe({
       next: () => {
+        this.mensagemSucesso = 'Livro excluído com sucesso!';
         this.carregarLivros();
       }
     });

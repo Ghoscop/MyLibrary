@@ -9,6 +9,10 @@
 <section class="form-card">
   <h2>Nova categoria</h2>
 
+  <div class="sucesso-box" *ngIf="mensagemSucesso">
+    {{ mensagemSucesso }}
+  </div>
+
   <div
     class="erro-box"
     *ngIf="mensagemErro"

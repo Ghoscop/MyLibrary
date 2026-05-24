@@ -25,8 +25,8 @@ export class Emprestimos implements OnInit {
   atrasados: Emprestimo[] = [];
   livros: Livro[] = [];
   emprestimos: Emprestimo[] = [];
-
   mensagemErro = '';
+  mensagemSucesso = '';
 
   novoEmprestimo: Emprestimo = {
     livro: {
@@ -68,7 +68,6 @@ export class Emprestimos implements OnInit {
   }
 
   carregarEmprestimos(): void {
-
     this.emprestimoService
       .ativos()
       .subscribe({
@@ -83,6 +82,7 @@ export class Emprestimos implements OnInit {
   emprestarLivro(): void {
 
     this.mensagemErro = '';
+    this.mensagemSucesso = '';
 
     this.emprestimoService
       .emprestar(this.novoEmprestimo)
@@ -99,6 +99,7 @@ export class Emprestimos implements OnInit {
             dataDevolucaoPrevista: ''
           };
 
+          this.mensagemSucesso = 'Emprestimo realizado com sucesso!';
           this.carregarLivros();
           this.carregarEmprestimos();
           this.carregarAtrasados();
@@ -117,11 +118,18 @@ export class Emprestimos implements OnInit {
 
   devolverLivro(id: number): void {
 
+    const confirmar = confirm('Tem certeza que deseja devolver este livro?');
+
+    if (!confirmar) {
+      return;
+    }
+
     this.emprestimoService
       .devolver(id)
       .subscribe({
 
         next: () => {
+          this.mensagemSucesso = 'Livro devolvido com sucesso!';
           this.carregarLivros();
           this.carregarEmprestimos();
           this.carregarAtrasados();

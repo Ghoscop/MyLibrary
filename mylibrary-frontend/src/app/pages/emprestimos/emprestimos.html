@@ -10,6 +10,10 @@
 
   <h2>Novo empréstimo</h2>
 
+  <div class="sucesso-box" *ngIf="mensagemSucesso">
+    {{ mensagemSucesso }}
+  </div>
+
   <div
     class="erro-box"
     *ngIf="mensagemErro"
