@@ -1,0 +1,60 @@
+name: CI - MyLibrary
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+
+  backend:
+
+    name: Backend Spring Boot
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build backend
+        run: |
+          cd mylibrary-backend
+          mvn clean package
+
+  frontend:
+
+    name: Frontend Angular
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        run: |
+          cd mylibrary-frontend
+          npm install
+
+      - name: Build frontend
+        run: |
+          cd mylibrary-frontend
+          npm run build
