@@ -51,6 +51,15 @@ export class Categorias implements OnInit{
     this.mensagemErro = '';
     this.mensagemSucesso = '';
 
+    if(
+      !this.novaCategoria.nome?.trim() ||
+      !this.novaCategoria.descricao?.trim()
+    ){
+      this.mensagemErro = 'Preencha todos os campos da categoria.';
+      this.cdr.detectChanges();
+      return;
+    }
+
     this.service.criar(this.novaCategoria).subscribe({
       next: () => {
 

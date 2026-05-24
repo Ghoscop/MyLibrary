@@ -84,6 +84,21 @@ export class Emprestimos implements OnInit {
     this.mensagemErro = '';
     this.mensagemSucesso = '';
 
+    if (
+      !this.novoEmprestimo.livro?.id ||
+      this.novoEmprestimo.livro.id === 0 ||
+      !this.novoEmprestimo.nomePessoa?.trim() ||
+      !this.novoEmprestimo.telefone?.trim() ||
+      !this.novoEmprestimo.dataDevolucaoPrevista
+    ) {
+
+      this.mensagemErro =
+        'Preencha todos os campos do empréstimo.';
+
+      this.cdr.detectChanges();
+      return;
+    }
+
     this.emprestimoService
       .emprestar(this.novoEmprestimo)
       .subscribe({
